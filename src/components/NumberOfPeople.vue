@@ -43,7 +43,6 @@ const emit = defineEmits<{
   padding: 0.5rem 0.5rem;
   border-radius: 32px;
   background: rgba(255, 255, 255, 0.15);
-  color: white;
   font-size: 1rem;
   font-weight: 500;
   backdrop-filter: blur(10px);
@@ -58,7 +57,6 @@ const emit = defineEmits<{
 .number-of-people--counter {
   background: transparent;
   border: none;
-  color: white;
   cursor: pointer;
   font-size: 1.5rem;
   width: 30px;

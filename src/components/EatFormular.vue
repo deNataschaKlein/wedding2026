@@ -1,26 +1,39 @@
 <script setup lang="ts">
-import Headline from './Headline.vue';
+import Headline from "./Headline.vue";
+
+const props = defineProps<{
+  modelValue: string;
+  index: number;
+}>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+function updateDiet(e: Event) {
+  const value = (e.target as HTMLInputElement).value;
+  emit('update:modelValue', value);
+}
 </script>
 
 <template>
   <div>
-    <Headline h2> Ich esse</Headline>
+    <Headline h2>{{index === 0? 'ich esse': '+' + index + ' isst'}}</Headline>
     <div class="glass-form">
       <div class="radio-button-group">
         <label>
-          <input type="radio" name="diet" value="vegetarisch" />
+          <input type="radio" :name="`diet-${index}`" value="vegetarisch" :checked="modelValue === 'vegetarisch'" @change="updateDiet" />
           <span class="custom-radio">Vegetarisch</span>
         </label>
         <label>
-          <input type="radio" name="diet" value="pescetarisch" />
+          <input type="radio" :name="`diet-${index}`" value="pescetarisch" :checked="modelValue === 'pescetarisch'" @change="updateDiet" />
           <span class="custom-radio">Pescetarisch</span>
         </label>
         <label>
-          <input type="radio" name="diet" value="mit_fleisch" />
+          <input type="radio" :name="`diet-${index}`" value="mit_fleisch" :checked="modelValue === 'mit_fleisch'" @change="updateDiet" />
           <span class="custom-radio">Mit Fleisch</span>
         </label>
         <label>
-          <input type="radio" name="diet" value="vegan" />
+          <input type="radio" :name="`diet-${index}`" value="vegan" :checked="modelValue === 'vegan'" @change="updateDiet" />
           <span class="custom-radio">Vegan</span>
         </label>
       </div>

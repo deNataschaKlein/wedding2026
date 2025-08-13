@@ -3,12 +3,26 @@ import Headline from "./components/Headline.vue";
 import AnmeldungToggle from "./components/AnmeldungToggle.vue";
 import EatFormular from "./components/EatFormular.vue";
 import NumberOfPeople from "./components/NumberOfPeople.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 const activeIndex = ref<number | null>(null);
 const erwachsene = ref<number>(1);
 const kinder = ref<number>(0);
 const mehrzahl = ref<boolean>(true);
+
+const diets = ref<string[]>([]);
+function updateDiet(index: number, value: string) {
+  diets.value[index] = value;
+}
+
+watch([erwachsene, kinder], () => {
+  const total = erwachsene.value + kinder.value;
+  // Array auf die richtige Länge bringen
+  while (diets.value.length < total) diets.value.push("");
+  while (diets.value.length > total) diets.value.pop();
+});
+
+
 </script>
 
 <template>
@@ -21,7 +35,11 @@ const mehrzahl = ref<boolean>(true);
           <NumberOfPeople label="Erwachsene" v-model="erwachsene"/>
           <NumberOfPeople label="Kinder" v-model="kinder"/>
         </div>
-        <EatFormular v-if="activeIndex === 2" v-for="erwachsener in erwachsene" :key="erwachsener"/>
+        <EatFormular v-if="activeIndex === 2" v-for="(_person, index) in erwachsene + kinder"
+                     :key="index"
+                     :modelValue="diets[index]"
+                     :index="index"
+                     @update:modelValue="updateDiet(index, $event)"/>
       </form>
 
   </div>
