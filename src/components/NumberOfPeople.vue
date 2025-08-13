@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PlusIcon, MinusIcon} from "@heroicons/vue/24/outline";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 
 const props = defineProps<{
   label: string;
