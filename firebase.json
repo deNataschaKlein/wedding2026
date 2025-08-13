@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "natascha-und-jan-heiraten",
     "public": "dist",
     "ignore": [
       "firebase.json",

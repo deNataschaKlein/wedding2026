@@ -1,15 +1,38 @@
 <script setup lang="ts">
 import { XMarkIcon, CheckIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
-import {ref} from "vue";
-const activeIndex = ref<number | null>(null);
+
+const props = defineProps<{ modelValue: number | null }>();
+const emit = defineEmits<{
+  (e: "update:modelValue", value: number | null): void;
+}>();
+
+const options = [
+  { value: 0, icon: XMarkIcon },
+  { value: 1, icon: QuestionMarkCircleIcon },
+  { value: 2, icon: CheckIcon }
+];
 </script>
 
 <template>
-<div class="glass-button-group">
-  <div class="glass-button"  @click="activeIndex = 0" :class="{ active: activeIndex === 0 }"><XMarkIcon class="glass-button--icon"/></div>
-  <div class="glass-button"  @click="activeIndex = 1" :class="{ active: activeIndex === 1 }"><QuestionMarkCircleIcon class="glass-button--icon"/></div>
-  <div class="glass-button"  @click="activeIndex = 2" :class="{ active: activeIndex === 2 }"><CheckIcon class="glass-button--icon"/></div>
-</div>
+  <div class="glass-button-group">
+    <label
+      v-for="option in options"
+      :key="option.value"
+      class="glass-button"
+      :class="{ active: props.modelValue === option.value }"
+    >
+      <input
+        type="radio"
+        name="anmeldung"
+        :value="option.value"
+        :checked="props.modelValue === option.value"
+        @change="emit('update:modelValue', option.value)"
+        style="display: none;"
+
+      />
+      <component :is="option.icon" class="glass-button--icon" />
+    </label>
+  </div>
 </template>
 
 <style scoped>
@@ -18,7 +41,6 @@ const activeIndex = ref<number | null>(null);
   justify-content: space-around;
   gap: 0.5rem;
   padding: 0.5rem 0.5rem;
-  border: none;
   border-radius: 32px;
   background: rgba(255, 255, 255, 0.15);
   color: white;
@@ -32,33 +54,22 @@ const activeIndex = ref<number | null>(null);
   transition: all 0.3s ease;
 }
 
-.glass-button{
+.glass-button {
   width: 100%;
   border-radius: 32px;
   padding: 0.5rem;
-
+  cursor: pointer;
 }
 
-.glass-button:hover{
+.glass-button:hover {
   background: rgba(255, 255, 255, 0.25);
 }
 
-.glass-button.active {
-  background: rgba(255, 255, 255, 0.5);
+.active {
+  background: rgba(255, 136, 0, 0.5);
 }
 
-.glass-button--icon{
+.glass-button--icon {
   width: 26px;
 }
-
-body {
-  background: linear-gradient(135deg, #c3ecf7, #a1c4fd);
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-
-
 </style>
