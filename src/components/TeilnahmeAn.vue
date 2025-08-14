@@ -16,7 +16,7 @@ function update(key: keyof typeof props.modelValue, value: boolean) {
       <input
         type="checkbox"
         :checked="props.modelValue.standesamt"
-        @change="update('standesamt', $event.target.checked)"
+        @change="update('standesamt', ($event.target as HTMLInputElement)?.checked)"
       />
       Standesamt
     </label>
@@ -24,7 +24,7 @@ function update(key: keyof typeof props.modelValue, value: boolean) {
       <input
         type="checkbox"
         :checked="props.modelValue.trauung"
-        @change="update('trauung', $event.target.checked)"
+        @change="update('trauung', ($event.target as HTMLInputElement)?.checked)"
       />
       Freie Trauung
     </label>
@@ -32,7 +32,7 @@ function update(key: keyof typeof props.modelValue, value: boolean) {
       <input
         type="checkbox"
         :checked="props.modelValue.feier"
-        @change="update('feier', $event.target.checked)"
+        @change="update('feier', ($event.target as HTMLInputElement)?.checked)"
       />
       Feier
     </label>

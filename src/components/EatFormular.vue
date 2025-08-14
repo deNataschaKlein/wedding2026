@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps<{
+const { modelValue, index } = defineProps<{
   modelValue: string;
   index: number;
 }>();
