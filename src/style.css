@@ -12,7 +12,7 @@
 }
 
 body {
-  background-image: url('assets/background3.jpg');
+  background-color: #ffbc95;
   background-size: cover;
   margin: 0;
   display: flex;

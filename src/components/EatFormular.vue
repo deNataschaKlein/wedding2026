@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Headline from "./Headline.vue";
 
 const props = defineProps<{
   modelValue: string;
@@ -8,7 +7,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
 }>();
-
 function updateDiet(e: Event) {
   const value = (e.target as HTMLInputElement).value;
   emit('update:modelValue', value);
@@ -16,60 +14,37 @@ function updateDiet(e: Event) {
 </script>
 
 <template>
-  <div>
-    <Headline h2>{{index === 0? 'ich esse': '+' + index + ' isst'}}</Headline>
-    <div class="glass-form">
-      <div class="radio-button-group">
-        <label>
-          <input type="radio" :name="`diet-${index}`" value="vegetarisch" :checked="modelValue === 'vegetarisch'" @change="updateDiet" />
-          <span class="custom-radio">Vegetarisch</span>
-        </label>
-        <label>
-          <input type="radio" :name="`diet-${index}`" value="pescetarisch" :checked="modelValue === 'pescetarisch'" @change="updateDiet" />
-          <span class="custom-radio">Pescetarisch</span>
-        </label>
-        <label>
-          <input type="radio" :name="`diet-${index}`" value="mit_fleisch" :checked="modelValue === 'mit_fleisch'" @change="updateDiet" />
-          <span class="custom-radio">Mit Fleisch</span>
-        </label>
-        <label>
-          <input type="radio" :name="`diet-${index}`" value="vegan" :checked="modelValue === 'vegan'" @change="updateDiet" />
-          <span class="custom-radio">Vegan</span>
-        </label>
-      </div>
-    </div>
-  </div>
+    <select
+      class="glass-dropdown"
+      :name="`diet-${index}`"
+      :value="modelValue"
+      @change="updateDiet"
+    >
+      <option value="vegetarisch">Vegetarisch</option>
+      <option value="pescetarisch">Pescetarisch</option>
+      <option value="mit_fleisch">Mit Fleisch</option>
+      <option value="vegan">Vegan</option>
+    </select>
 </template>
 
 <style scoped>
 
-.radio-button-group {
-  display: grid;
-  grid-gap: 1rem;
-}
-
-.radio-button-group input[type="radio"] {
-  display: none;
-}
-
-.custom-radio {
-  display: block;
+.glass-dropdown {
+  width: 100%;
+  padding: 0.75rem 1rem;
   border-radius: 32px;
   background: rgba(255, 255, 255, 0.15);
-  padding: 0.75rem 1rem;
-  text-align: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-input[type="radio"]:checked + .custom-radio {
-  background: rgba(255, 136, 0, 0.5);
-  color: #fff;
+  margin-top: 0.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 </style>

@@ -21,21 +21,24 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="number-of-people">{{label}}
-<div class="glass-counter-group">
-  <button type="button" class="number-of-people--counter" @click="internalValue > 0 && updateValue(internalValue - 1)"><MinusIcon/></button>
-  {{props.modelValue}}
-  <button type="button" class="number-of-people--counter" @click="updateValue(internalValue+1)"><PlusIcon/></button>
+  <div class="number-of-people">
+    {{label}}
+    <div class="glass-counter-group">
+      <button type="button" class="number-of-people--counter" @click="internalValue > 0 && updateValue(internalValue - 1)"><MinusIcon/></button>
+      {{props.modelValue}}
+      <button type="button" class="number-of-people--counter" @click="updateValue(internalValue+1)"><PlusIcon/></button>
 
-</div>
     </div>
+  </div>
 </template>
 
 <style scoped>
-.number-of-people{
+.number-of-people {
   display: grid;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
-
 .glass-counter-group{
   display: flex;
   justify-content: space-between;
