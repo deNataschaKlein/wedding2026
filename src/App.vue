@@ -4,14 +4,14 @@ import AnmeldungToggle from "./components/AnmeldungToggle.vue";
 import EatFormular from "./components/EatFormular.vue";
 import NumberOfPeople from "./components/NumberOfPeople.vue";
 import TeilnahmeAn from "./components/TeilnahmeAn.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const formCompleted = ref(false);
 
 const activeIndex = ref<number | null>(null);
 const erwachsene = ref<number>(1);
 const kinder = ref<number>(0);
-const totalPeople = computed(() =>erwachsene.value + kinder.value);
+const totalPeople = computed(() => erwachsene.value + kinder.value);
 
 const isMehrzahlErlaubt = ref<boolean>(true);
 const isStandesamtErlaubt = ref<boolean>(false);
@@ -21,7 +21,7 @@ const diets = ref<string[]>([]);
 const teilnahmen = ref({
   standesamt: false,
   trauung: false,
-  feier: false
+  feier: false,
 });
 
 function updateDiet(index: number, value: string) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PlusIcon, MinusIcon} from "@heroicons/vue/24/outline";
-import {ref} from "vue";
+import { PlusIcon, MinusIcon } from "@heroicons/vue/24/outline";
+import { ref } from "vue";
 
 const props = defineProps<{
   label: string;
@@ -11,9 +11,8 @@ const internalValue = ref(props.modelValue);
 
 function updateValue(val: number) {
   internalValue.value = val;
-  emit('update:modelValue', val);
+  emit("update:modelValue", val);
 }
-
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: number): void;
@@ -22,12 +21,23 @@ const emit = defineEmits<{
 
 <template>
   <div class="number-of-people">
-    {{label}}
+    {{ label }}
     <div class="glass-counter-group">
-      <button type="button" class="number-of-people--counter" @click="internalValue > 0 && updateValue(internalValue - 1)"><MinusIcon/></button>
-      {{props.modelValue}}
-      <button type="button" class="number-of-people--counter" @click="updateValue(internalValue+1)"><PlusIcon/></button>
-
+      <button
+        type="button"
+        class="number-of-people--counter"
+        @click="internalValue > 0 && updateValue(internalValue - 1)"
+      >
+        <MinusIcon />
+      </button>
+      {{ props.modelValue }}
+      <button
+        type="button"
+        class="number-of-people--counter"
+        @click="updateValue(internalValue + 1)"
+      >
+        <PlusIcon />
+      </button>
     </div>
   </div>
 </template>
@@ -39,7 +49,7 @@ const emit = defineEmits<{
   max-width: 100%;
   box-sizing: border-box;
 }
-.glass-counter-group{
+.glass-counter-group {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { XMarkIcon, CheckIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline';
+import {
+  XMarkIcon,
+  CheckIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/vue/24/outline";
 
 const props = defineProps<{ modelValue: number | null }>();
 const emit = defineEmits<{
@@ -9,7 +13,7 @@ const emit = defineEmits<{
 const options = [
   { value: 0, icon: XMarkIcon },
   { value: 1, icon: QuestionMarkCircleIcon },
-  { value: 2, icon: CheckIcon }
+  { value: 2, icon: CheckIcon },
 ];
 </script>
 
@@ -27,8 +31,7 @@ const options = [
         :value="option.value"
         :checked="props.modelValue === option.value"
         @change="emit('update:modelValue', option.value)"
-        style="display: none;"
-
+        style="display: none"
       />
       <component :is="option.icon" class="glass-button--icon" />
     </label>

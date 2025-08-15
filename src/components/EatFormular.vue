@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const { modelValue, index } = defineProps<{
   modelValue: string;
   index: number;
@@ -9,26 +8,25 @@ const emit = defineEmits<{
 }>();
 function updateDiet(e: Event) {
   const value = (e.target as HTMLInputElement).value;
-  emit('update:modelValue', value);
+  emit("update:modelValue", value);
 }
 </script>
 
 <template>
-    <select
-      class="glass-dropdown"
-      :name="`diet-${index}`"
-      :value="modelValue"
-      @change="updateDiet"
-    >
-      <option value="vegetarisch">Vegetarisch</option>
-      <option value="pescetarisch">Pescetarisch</option>
-      <option value="mit_fleisch">Mit Fleisch</option>
-      <option value="vegan">Vegan</option>
-    </select>
+  <select
+    class="glass-dropdown"
+    :name="`diet-${index}`"
+    :value="modelValue"
+    @change="updateDiet"
+  >
+    <option value="vegetarisch">Vegetarisch</option>
+    <option value="pescetarisch">Pescetarisch</option>
+    <option value="mit_fleisch">Mit Fleisch</option>
+    <option value="vegan">Vegan</option>
+  </select>
 </template>
 
 <style scoped>
-
 .glass-dropdown {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -46,5 +44,4 @@ function updateDiet(e: Event) {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
-
 </style>

@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "natascha-und-jan-heiraten",
   storageBucket: "natascha-und-jan-heiraten.firebasestorage.app",
   messagingSenderId: "470655239329",
-  appId: "1:470655239329:web:baf7fddd014c3199f3dce0"
+  appId: "1:470655239329:web:baf7fddd014c3199f3dce0",
 };
 
 const app = initializeApp(firebaseConfig);
