@@ -14,7 +14,7 @@ function updateDiet(e: Event) {
 
 <template>
   <select
-    class="glass-dropdown"
+    class="glass-style glass-dropdown"
     :name="`diet-${index}`"
     :value="modelValue"
     @change="updateDiet"
@@ -28,18 +28,6 @@ function updateDiet(e: Event) {
 
 <style scoped>
 .glass-dropdown {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.15);
-  font-size: 1rem;
-  font-weight: 500;
-  outline: none;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  margin-top: 0.5rem;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;

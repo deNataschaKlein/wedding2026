@@ -14,7 +14,7 @@ const kinder = ref<number>(0);
 const totalPeople = computed(() => erwachsene.value + kinder.value);
 
 const isMehrzahlErlaubt = ref<boolean>(true);
-const isStandesamtErlaubt = ref<boolean>(false);
+const isStandesamtErlaubt = ref<boolean>(true);
 const isTrauungErlaubt = ref<boolean>(true);
 
 const diets = ref<string[]>([]);
@@ -63,18 +63,22 @@ onMounted(() => {
         :isTrauungErlaubt="isTrauungErlaubt"
         :isStandesamtErlaubt="isStandesamtErlaubt"
       />
+      <Headline h3 v-if="activeIndex === 2 && isTrauungErlaubt"
+        >Essen:
+      </Headline>
       <EatFormular
-        v-if="activeIndex === 2"
+        v-if="activeIndex === 2 && isTrauungErlaubt"
         v-for="index in totalPeople"
         :key="index"
         :modelValue="diets[index]"
         :index="index"
         @update:modelValue="updateDiet(index, $event)"
       />
+
       <textarea
-        class="glass-textarea"
+        class="glass-style glass-textarea"
         name="nachricht"
-        rows="2"
+        rows="3"
         placeholder="Nachricht oder Kommentar..."
       />
       <button
@@ -112,17 +116,8 @@ onMounted(() => {
 .glass-textarea {
   display: block;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.15);
   font-size: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-  width: 100%;
-  max-width: 570px;
 }
 
 .number-of-people--container {
@@ -136,7 +131,7 @@ onMounted(() => {
   width: 100%;
   border-radius: 32px;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(160, 160, 150);
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -147,6 +142,6 @@ onMounted(() => {
 }
 
 .absenden-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgb(122, 122, 116);
 }
 </style>

@@ -18,7 +18,7 @@ const options = [
 </script>
 
 <template>
-  <div class="glass-button-group">
+  <div class="glass-style glass-button-group">
     <label
       v-for="option in options"
       :key="option.value"
@@ -43,18 +43,11 @@ const options = [
   display: flex;
   justify-content: space-around;
   gap: 0.5rem;
-  padding: 0.5rem 0.5rem;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.15);
-  font-size: 1rem;
   font-weight: 500;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
   max-width: 600px;
+  width: inherit;
 }
 
 .glass-button {
@@ -74,5 +67,15 @@ const options = [
 
 .glass-button--icon {
   width: 26px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-button:hover {
+    background: rgba(17, 25, 40, 0.125);
+  }
+
+  .active {
+    background: rgba(17, 25, 40, 0.25);
+  }
 }
 </style>

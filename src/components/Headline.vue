@@ -27,7 +27,7 @@ const props = defineProps<{
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
-  color: #ff9e35;
+  color: #a0a194;
 }
 
 .headline-h1 {

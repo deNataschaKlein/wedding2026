@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Headline from "./Headline.vue";
+
 const props = defineProps<{
   modelValue: { standesamt: boolean; trauung: boolean; feier: boolean };
   isStandesamtErlaubt: boolean;
@@ -8,39 +10,41 @@ const emit = defineEmits<{
   (e: "update:modelValue", value: typeof props.modelValue): void;
 }>();
 
-function update(key: keyof typeof props.modelValue, value: boolean) {
-  emit("update:modelValue", { ...props.modelValue, [key]: value });
+function update(key: keyof typeof props.modelValue) {
+  emit("update:modelValue", {
+    ...props.modelValue,
+    [key]: !props.modelValue[key],
+  });
 }
 </script>
 
 <template>
+  <Headline h3>Teilnahme an:</Headline>
   <div class="glass-checkbox-group">
-    <label class="glass-checkbox" v-if="isStandesamtErlaubt">
-      <input
-        type="checkbox"
-        :checked="props.modelValue.standesamt"
-        @change="
-          update('standesamt', ($event.target as HTMLInputElement)?.checked)
-        "
-      />
+    <label
+      class="glass-style glass-checkbox"
+      :class="{ active: props.modelValue.standesamt }"
+      v-if="isStandesamtErlaubt"
+      @change="update('standesamt')"
+    >
+      <input type="checkbox" style="display: none" />
       Standesamt
     </label>
-    <label class="glass-checkbox" v-if="isTrauungErlaubt">
-      <input
-        type="checkbox"
-        :checked="props.modelValue.trauung"
-        @change="
-          update('trauung', ($event.target as HTMLInputElement)?.checked)
-        "
-      />
+    <label
+      class="glass-style glass-checkbox"
+      :class="{ active: props.modelValue.trauung }"
+      v-if="isTrauungErlaubt"
+      @change="update('trauung')"
+    >
+      <input type="checkbox" style="display: none" />
       Freie Trauung
     </label>
-    <label class="glass-checkbox">
-      <input
-        type="checkbox"
-        :checked="props.modelValue.feier"
-        @change="update('feier', ($event.target as HTMLInputElement)?.checked)"
-      />
+    <label
+      class="glass-style glass-checkbox"
+      :class="{ active: props.modelValue.feier }"
+      @change="update('feier')"
+    >
+      <input type="checkbox" style="display: none" />
       Feier
     </label>
   </div>
@@ -58,23 +62,14 @@ function update(key: keyof typeof props.modelValue, value: boolean) {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 1rem;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.15);
-  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.3);
   text-align: center;
+  width: max-content;
+  transition: background 0.3s;
 }
 
-.glass-checkbox input[type="checkbox"] {
-  accent-color: #fff;
-  width: 22px;
-  height: 22px;
-  border-radius: 8px;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+.glass-checkbox.active {
+  background: rgba(17, 25, 40, 0.25);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 </style>
