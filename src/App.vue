@@ -5,7 +5,16 @@ import EatFormular from "./components/EatFormular.vue";
 import NumberOfPeople from "./components/NumberOfPeople.vue";
 import TeilnahmeAn from "./components/TeilnahmeAn.vue";
 import { computed, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
+const RechteEnum = {
+  FEIERN_EINZAHL: "93585bd0-3b70-44f8-b0b8-509cfa8e3325",
+  FREIE_TRAUUNG_MEHRZAHL: "98ab33fc-5c5a-493f-88e9-8156eb719b53",
+  KANN_ALLES_MEHRZAHL: "03c2937c-0029-4671-ac18-ed47f68cf15f",
+};
+
+const route = useRoute();
+const uuid = computed(() => route.params.uuid);
 const formCompleted = ref(false);
 
 const activeIndex = ref<number | null>(null);
@@ -13,9 +22,20 @@ const erwachsene = ref<number>(1);
 const kinder = ref<number>(0);
 const totalPeople = computed(() => erwachsene.value + kinder.value);
 
-const isMehrzahlErlaubt = ref<boolean>(true);
-const isStandesamtErlaubt = ref<boolean>(true);
-const isTrauungErlaubt = ref<boolean>(true);
+const isMehrzahlErlaubt = computed(
+  () =>
+    uuid.value !== RechteEnum.FEIERN_EINZAHL &&
+    (uuid.value === RechteEnum.FREIE_TRAUUNG_MEHRZAHL ||
+      uuid.value === RechteEnum.KANN_ALLES_MEHRZAHL),
+);
+
+const isStandesamtErlaubt = computed(
+  () => RechteEnum.KANN_ALLES_MEHRZAHL === uuid.value,
+);
+
+const isTrauungErlaubt = computed(
+  () => RechteEnum.FREIE_TRAUUNG_MEHRZAHL === uuid.value,
+);
 
 const diets = ref<string[]>([]);
 const teilnahmen = ref({
@@ -58,7 +78,7 @@ onMounted(() => {
         <NumberOfPeople label="Kinder" v-model="kinder" />
       </div>
       <TeilnahmeAn
-        v-if="activeIndex === 2"
+        v-if="activeIndex === 2 && (isTrauungErlaubt || isStandesamtErlaubt)"
         v-model="teilnahmen"
         :isTrauungErlaubt="isTrauungErlaubt"
         :isStandesamtErlaubt="isStandesamtErlaubt"
@@ -100,6 +120,19 @@ onMounted(() => {
   padding: 2rem;
   display: grid;
   max-width: 600px;
+  background-color: rgba(108, 110, 95, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 16px;
+}
+
+@media (min-width: 375px) {
+  .frame-container {
+    display: block;
+    position: initial;
+    border-radius: 0;
+    padding: 1rem;
+  }
 }
 
 @media (min-width: 700px) {
@@ -111,6 +144,9 @@ onMounted(() => {
 .glass-form {
   display: grid;
   grid-gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .glass-textarea {
@@ -118,6 +154,7 @@ onMounted(() => {
   align-items: center;
   font-size: 1rem;
   cursor: pointer;
+  color: #fff;
 }
 
 .number-of-people--container {
@@ -131,7 +168,7 @@ onMounted(() => {
   width: 100%;
   border-radius: 32px;
   padding: 0.75rem 1rem;
-  background: rgba(160, 160, 150);
+  background: rgba(255, 255, 255);
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -143,5 +180,14 @@ onMounted(() => {
 
 .absenden-btn:hover {
   background: rgb(122, 122, 116);
+}
+
+@media (prefers-color-scheme: light) {
+  .frame-container {
+    background-color: rgba(185, 189, 162, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 16px;
+  }
 }
 </style>

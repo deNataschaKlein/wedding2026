@@ -47,7 +47,6 @@ const options = [
   cursor: pointer;
   transition: all 0.3s ease;
   max-width: 600px;
-  width: inherit;
 }
 
 .glass-button {

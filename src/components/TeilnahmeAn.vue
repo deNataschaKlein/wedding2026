@@ -33,7 +33,7 @@ function update(key: keyof typeof props.modelValue) {
     <label
       class="glass-style glass-checkbox"
       :class="{ active: props.modelValue.trauung }"
-      v-if="isTrauungErlaubt"
+      v-if="isTrauungErlaubt || isStandesamtErlaubt"
       @change="update('trauung')"
     >
       <input type="checkbox" style="display: none" />

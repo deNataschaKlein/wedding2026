@@ -22,12 +22,12 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oranienbaum&display=swap");
 .headline {
-  font-family: "Pacifico", cursive;
+  font-family: "Oranienbaum", serif;
   font-weight: 400;
   font-style: normal;
-  color: #a0a194;
+  color: #ffffff;
 }
 
 .headline-h1 {

@@ -48,7 +48,7 @@ const emit = defineEmits<{
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  color: rgb(122, 122, 116);
+  color: #fff;
 }
 .glass-counter-group {
   display: flex;
@@ -67,6 +67,6 @@ const emit = defineEmits<{
   cursor: pointer;
   font-size: 1.5rem;
   width: 30px;
-  color: rgb(122, 122, 116);
+  color: #fff;
 }
 </style>
