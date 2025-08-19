@@ -29,6 +29,14 @@ const isMehrzahlErlaubt = computed(
       uuid.value === RechteEnum.KANN_ALLES_MEHRZAHL),
 );
 
+const correctUuid = computed(() => {
+  return (
+    uuid.value === RechteEnum.FREIE_TRAUUNG_MEHRZAHL ||
+    uuid.value === RechteEnum.KANN_ALLES_MEHRZAHL ||
+    uuid.value === RechteEnum.FEIERN_EINZAHL
+  );
+});
+
 const isStandesamtErlaubt = computed(
   () => RechteEnum.KANN_ALLES_MEHRZAHL === uuid.value,
 );
@@ -65,7 +73,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="frame-container">
+  <div class="frame-container" v-if="correctUuid">
     <Headline h1>Save the Date</Headline>
     <Headline h3>03.07.2026</Headline>
     <form class="glass-form">
@@ -83,6 +91,11 @@ onMounted(() => {
         :isTrauungErlaubt="isTrauungErlaubt"
         :isStandesamtErlaubt="isStandesamtErlaubt"
       />
+      <div
+        v-if="activeIndex === 2 && !(isTrauungErlaubt || isStandesamtErlaubt)"
+      >
+        Wir laden dich um 20 Uhr zu unserer Feier nach der Trauung ein
+      </div>
       <Headline h3 v-if="activeIndex === 2 && isTrauungErlaubt"
         >Essen:
       </Headline>
